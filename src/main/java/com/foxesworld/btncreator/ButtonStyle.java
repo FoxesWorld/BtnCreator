@@ -1,5 +1,7 @@
 package com.foxesworld.btncreator;
 
+import static com.foxesworld.btncreator.func.Functions.getFont;
+import static com.foxesworld.btncreator.func.Functions.loadImage;
 import java.awt.Color;
 import java.awt.FontFormatException;
 import java.awt.image.BufferedImage;
@@ -20,7 +22,7 @@ public abstract class ButtonStyle {
     public Align align;
     public BufferedImage texture;
 
-    public ButtonStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, boolean visible, Align textAlign) {
+    protected ButtonStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, boolean visible, Align textAlign) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -30,14 +32,14 @@ public abstract class ButtonStyle {
         this.color = color;
         this.visible = visible;
         this.align = textAlign;
-        this.texture = Button.loadImage(texture);
+        this.texture = loadImage(texture);
     }
 
     public void apply(Button button) throws IOException, FontFormatException {
         button.setVisible(visible);
         button.setBounds(x, y, w, h);
         button.setForeground(color);
-        button.setFont(Button.getFont(fontSize, fontName));
+        button.setFont(getFont(fontSize, fontName));
         button.setHorizontalAlignment(align == Align.LEFT ? SwingConstants.LEFT : align == Align.CENTER ? SwingConstants.CENTER : SwingConstants.RIGHT);
         int i = texture.getHeight() / 4;
 

@@ -17,6 +17,7 @@ public class BtnCreator {
     public static ButtonStyle button;
 
     public BtnCreator(int x, int y, int w, int h, String fontName, String texture, String text, float fontSize, Color color, boolean visible, Align textAlign) {
+        
         try {
             button = new ButtonStyle(x, y, w, h, fontName, texture, fontSize, color, visible, textAlign) {
             };
@@ -26,7 +27,7 @@ public class BtnCreator {
         }
     }
     
-    public BtnCreator(Boolean visible){
+    public BtnCreator(Boolean visible) {
         try {
             button.visible = visible;
             button.apply(Button);

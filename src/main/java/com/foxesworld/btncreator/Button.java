@@ -1,10 +1,7 @@
 package com.foxesworld.btncreator;
 
-import static com.foxesworld.btncreator.BtnCreator.btnDir;
-import static com.foxesworld.btncreator.BtnCreator.fontsDir;
+import static com.foxesworld.btncreator.func.Functions.fill;
 import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -12,8 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 public class Button extends JButton implements MouseListener, MouseMotionListener {
@@ -26,7 +21,7 @@ public class Button extends JButton implements MouseListener, MouseMotionListene
     public BufferedImage pressedTX;
     public BufferedImage lockedTX;
 
-    public Button(String text) {
+    protected Button(String text) {
         addMouseListener(this);
         addMouseMotionListener(this);
         setText(text);
@@ -83,9 +78,11 @@ public class Button extends JButton implements MouseListener, MouseMotionListene
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.pressed = (!this.pressed);
-        this.entered = true;
-        repaint();
+        if (e.getButton() == MouseEvent.BUTTON1){
+            this.pressed = (!this.pressed);
+            this.entered = true;
+            repaint();
+        }
     }
 
     @Override
@@ -119,28 +116,5 @@ public class Button extends JButton implements MouseListener, MouseMotionListene
         return res;
     }
 
-    private static BufferedImage fill(BufferedImage texture, int w, int h) {
-        int sizex = texture.getWidth();
-        int sizey = texture.getHeight();
-        BufferedImage img = new BufferedImage(w, h, 2);
-        for (int x = 0; x <= w / sizex; x++) {
-            for (int y = 0; y <= h / sizey; y++) {
-                img.getGraphics().drawImage(texture, x * sizex, y * sizey, null);
-            }
-        }
-        return img;
-    }
 
-    public static BufferedImage loadImage(String name) {
-        try {
-            return ImageIO.read(Button.class.getResource(btnDir + name));
-        } catch (IOException e) {
-            return new BufferedImage(1, 1, 2);
-        }
-    }
-
-    public static Font getFont(float size, String fontName) throws IOException, FontFormatException {
-        Font font = Font.createFont(0, Button.class.getResourceAsStream(fontsDir + fontName + ".ttf")).deriveFont(size);
-        return font.deriveFont(size);
-    }
 }
