@@ -25,8 +25,8 @@ public class test extends JFrame implements ActionListener {
     //public static ButtonStyle ButtonStyle2 = new ButtonStyle(65, 110, 200, 47, "test", "test.png", 12F, Color.decode("#a39595"), true, Align.LEFT);
     //public static Button      Button = new Button("Hello");
     //public static Button      Button2 = new Button("Hello");
-    public static Button BtCrt = new BtnCreator(65, 60, 200, 47, "test", "test.png", "Click me", 12F, Color.decode("#a39595"), true, Align.LEFT).getButton();
-    public static Button BtCrt2 = new BtnCreator(65, 110, 200, 47, "test", "test.png", "Hello", 12F, Color.decode("#a39595"), true, Align.LEFT).getButton();
+    public static Button BtCrt = new BtnCreator(65, 60, 200, 47, "test", "test.png", "Click me", 12F, Color.decode("#a39595"), Align.LEFT).getButton(true);
+    public static Button BtCrt2 = new BtnCreator(65, 110, 200, 47, "test", "test.png", "Hello", 12F, Color.decode("#a39595"), Align.LEFT).getButton(true);
 
     protected JLabel description;
     Integer num = 0;
@@ -52,7 +52,6 @@ public class test extends JFrame implements ActionListener {
 
     private void screen() {
         this.setTitle("BtnGenerator by AidenFox");
-        setDefaultCloseOperation(3);
         setResizable(false);
         test.panel = new JPanel() {
             @Override
@@ -73,8 +72,8 @@ public class test extends JFrame implements ActionListener {
         add(test.panel, "Center");
         pack();
         setLocationRelativeTo(null);
-        //validate();
-        //repaint();
+        validate();
+        repaint();
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -93,7 +92,7 @@ public class test extends JFrame implements ActionListener {
             } else {
                 text = "Fox";
             }
-            BtCrt2 = new BtnCreator(text).getButton();
+            BtCrt2 = new BtnCreator(text).getButton(true);
         }
 
     }

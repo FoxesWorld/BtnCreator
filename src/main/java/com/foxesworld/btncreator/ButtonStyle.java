@@ -22,7 +22,7 @@ public class ButtonStyle {
     public Align align;
     public BufferedImage texture;
 
-    public ButtonStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, boolean visible, Align textAlign) {
+    protected ButtonStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, Align textAlign) {
         this.xPos = x;
         this.yPos = y;
         this.width = w;
@@ -30,13 +30,9 @@ public class ButtonStyle {
         this.fontName = fontName;
         this.fontSize = fontSize;
         this.color = color;
-        this.visible = visible;
+        //this.visible = visible;
         this.align = textAlign;
         this.texture = loadImage(texture);
-    }
-    
-    public ButtonStyle(boolean visible){
-        this.visible = visible;
     }
 
     public void apply(Button button) throws IOException, FontFormatException {

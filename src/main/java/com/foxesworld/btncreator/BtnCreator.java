@@ -3,6 +3,8 @@ package com.foxesworld.btncreator;
 import java.awt.Color;
 import java.awt.FontFormatException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,9 +18,10 @@ public class BtnCreator {
     public static Button Button;
     public static ButtonStyle ButtonStyle;
 
-    public BtnCreator(int x, int y, int w, int h, String fontName, String texture, String title, float fontSize, Color color, boolean visible, Align textAlign) {
+    public BtnCreator(int x, int y, int w, int h, String fontName, String texture, String title, float fontSize, Color color, Align textAlign) {
         Button = new Button(texture);
-        ButtonStyle = new ButtonStyle(x, y, w, h, fontName, texture, fontSize, color, visible, textAlign);
+        System.out.println("[" + title + "] PosX " + x + " PosY " + y + " With: " + w + " Height: " + h);
+        ButtonStyle = new ButtonStyle(x, y, w, h, fontName, texture, fontSize, color, textAlign);
         try {
             Button.setText(title);
             ButtonStyle.apply(Button);
@@ -53,7 +56,13 @@ public class BtnCreator {
         }
     }
 
-    public static Button getButton() {
+    public static Button getButton(Boolean display) {
+        ButtonStyle.visible = display;
+        try {
+            ButtonStyle.apply(Button);
+        } catch (IOException | FontFormatException ex) {
+            Logger.getLogger(BtnCreator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Button;
     }
 }

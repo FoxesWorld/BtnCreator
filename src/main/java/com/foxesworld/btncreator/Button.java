@@ -21,7 +21,7 @@ public class Button extends JButton implements MouseListener, MouseMotionListene
     public BufferedImage pressedTX;
     public BufferedImage lockedTX;
 
-    public Button(String text) {
+    protected Button(String text) {
         addMouseListener(this);
         addMouseMotionListener(this);
         setText(text);
