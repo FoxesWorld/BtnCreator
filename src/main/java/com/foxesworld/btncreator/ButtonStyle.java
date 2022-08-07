@@ -9,12 +9,12 @@ import java.io.IOException;
 
 import javax.swing.SwingConstants;
 
-public abstract class ButtonStyle {
+public class ButtonStyle {
 
-    public int x = 0;
-    public int y = 0;
-    public int w = 0;
-    public int h = 0;
+    public int xPos = 0;
+    public int yPos = 0;
+    public int width = 0;
+    public int height = 0;
     public String fontName;
     public float fontSize = 1F;
     public Color color;
@@ -22,11 +22,11 @@ public abstract class ButtonStyle {
     public Align align;
     public BufferedImage texture;
 
-    protected ButtonStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, boolean visible, Align textAlign) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+    public ButtonStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, boolean visible, Align textAlign) {
+        this.xPos = x;
+        this.yPos = y;
+        this.width = w;
+        this.height = h;
         this.fontName = fontName;
         this.fontSize = fontSize;
         this.color = color;
@@ -34,10 +34,14 @@ public abstract class ButtonStyle {
         this.align = textAlign;
         this.texture = loadImage(texture);
     }
+    
+    public ButtonStyle(boolean visible){
+        this.visible = visible;
+    }
 
     public void apply(Button button) throws IOException, FontFormatException {
         button.setVisible(visible);
-        button.setBounds(x, y, w, h);
+        button.setBounds(xPos, yPos, width, height);
         button.setForeground(color);
         button.setFont(getFont(fontSize, fontName));
         button.setHorizontalAlignment(align == Align.LEFT ? SwingConstants.LEFT : align == Align.CENTER ? SwingConstants.CENTER : SwingConstants.RIGHT);
@@ -47,5 +51,9 @@ public abstract class ButtonStyle {
         button.rolloverTX = texture.getSubimage(0, i, texture.getWidth(), i);
         button.pressedTX = texture.getSubimage(0, i * 2, texture.getWidth(), i);
         button.lockedTX = texture.getSubimage(0, i * 3, texture.getWidth(), i);
+    }
+    
+    public void setPosition(){
+    
     }
 }

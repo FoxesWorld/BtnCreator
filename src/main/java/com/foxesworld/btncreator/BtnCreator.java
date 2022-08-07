@@ -14,24 +14,43 @@ public class BtnCreator {
     public final static String fontsDir = "/assets/fonts/";
 
     public static Button Button;
-    public static ButtonStyle button;
+    public static ButtonStyle ButtonStyle;
 
-    public BtnCreator(int x, int y, int w, int h, String fontName, String texture, String text, float fontSize, Color color, boolean visible, Align textAlign) {
-        
+    public BtnCreator(int x, int y, int w, int h, String fontName, String texture, String title, float fontSize, Color color, boolean visible, Align textAlign) {
+        Button = new Button(texture);
+        ButtonStyle = new ButtonStyle(x, y, w, h, fontName, texture, fontSize, color, visible, textAlign);
         try {
-            button = new ButtonStyle(x, y, w, h, fontName, texture, fontSize, color, visible, textAlign) {
-            };
-            Button = new Button(text);
-            button.apply(Button);
+            Button.setText(title);
+            ButtonStyle.apply(Button);
         } catch (IOException | FontFormatException ex) {
         }
     }
-    
+
     public BtnCreator(Boolean visible) {
         try {
-            button.visible = visible;
-            button.apply(Button);
-        } catch (IOException | FontFormatException ex) {}
+            ButtonStyle.visible = visible;
+            ButtonStyle.apply(Button);
+        } catch (IOException | FontFormatException ex) {
+        }
+    }
+
+    public BtnCreator(String btnText) {
+        try {
+            Button.setText(btnText);
+            ButtonStyle.apply(Button);
+        } catch (IOException | FontFormatException ex) {
+        }
+    }
+
+    public BtnCreator(int x, int y, int w, int h) {
+        try {
+            ButtonStyle.xPos = x;
+            ButtonStyle.yPos = y;
+            ButtonStyle.width = w;
+            ButtonStyle.height = h;
+            ButtonStyle.apply(Button);
+        } catch (IOException | FontFormatException ex) {
+        }
     }
 
     public static Button getButton() {
